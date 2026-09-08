@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---------- Build stage ----------
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 RUN corepack enable && corepack prepare pnpm@11.13.1 --activate
 WORKDIR /app
 
@@ -21,7 +21,7 @@ COPY packages ./packages
 RUN pnpm --filter @posg-ttt/client build
 
 # ---------- Runtime stage ----------
-FROM node:20-alpine
+FROM node:22-alpine
 RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 WORKDIR /app
 
