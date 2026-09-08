@@ -1,0 +1,476 @@
+.rules {
+  padding-left: 20px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 0 24px;
+  text-align: left;
+    font-family: 'Inter', sans-serif;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  aspect-ratio: 1;
+  margin: 16px 0;
+}
+
+.cell {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 0;
+  aspect-ratio: 1;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cell-interactable{
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+.cell-interactable:hover:not(:disabled){
+  transform: scale(1.07);
+}
+.cell-interactable:active:not(:disabled){
+  transform: scale(0.93);
+}
+.cell-selected{
+  background: var(--color-you-50);
+  border-color: var(--color-you-500);
+}
+.cell-yours{
+  color: var(--color-you-500);
+}
+.cell-yours-captured{
+  color: #fff;
+  background: var(--color-you-500);
+}
+.cell-opponent{
+  color: var(--color-opponent-500);
+}
+.cell-opponent-captured{
+  color: #fff;
+  background: var(--color-opponent-500);
+}
+.cell-forbidden {
+  background: #f0f0f0;
+  color: var(--forbidden);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.cell-yours-last{
+  border: 4px solid var(--color-you-100);
+}
+.cell-opponent-last{
+  border: 4px solid var(--color-opponent-100);
+}
+.cell-collision{
+  border: 4px solid var(--collision); 
+}
+
+.animate-cell-shake{ animation: horizontal-shake 0.5s ease; }
+@keyframes horizontal-shake{
+  0% { transform: translateX(0); }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-5px) }
+  75% { transform: translateX(5px) }
+  100% { transform: translateX(0) }
+}
+
+.animate-cell-flip{ animation: flip 0.4s ease-in-out; }
+@keyframes flip{
+  0% { transform: rotateY(0); }
+  50% { transform: rotateY(90deg) }
+  51% { transform: rotateY(-90deg) }
+  100% { transform: rotateY(0deg) }
+}
+
+
+/* Turn bar */
+/*
+.turnbar{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+
+/* Text Styles */
+.text-label{
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.text-status{
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+.text-status.header{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.text-status.sm{
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  font-size: 0.74rem;
+  font-weight: 400;
+}
+
+.text-timer{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600 ;
+}
+
+.text-modal-title{
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-align: center;
+}
+
+.text-modal-desc{
+  font-family: 'Inter', sans-serif;
+  font-size: 0.84rem;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.text-error-code{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04rem;
+}
+
+.text-error-title{
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02rem;
+  margin: 0px;
+  text-align: center;
+}
+
+.text-error-message{
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 1.65;
+  margin:0px;
+}
+
+.error-badge{
+  border: 1px solid;
+  border-radius: 99px;
+  padding: 2px 12px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+button{
+  padding: 0.625rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.small{
+  padding: 0.3175rem 0.5rem;
+  border-radius: 11px;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+button.rounded{
+  border-radius: 12px;
+  
+  transition: background-color 0.2s ease, transform 0.2s ease-in-out;
+}
+
+button.rounded:hover:not(:active):not(:disabled){
+  transform: scale(1.02);
+}
+
+button.rounded:active:not(:disabled){
+  transform: scale(0.97);
+}
+
+button.rounded:disabled{
+  background: var(--btn-primary-disabled);
+}
+
+button.rounded.success{
+  background: var(--btn-primary-success);
+}
+
+button.icon{
+  padding: 0rem 0.3125rem;
+  cursor: pointer;
+}
+
+button.submit{
+  background: var(--btn-primary-enabled);
+
+  color:white;
+  font-size: 0.85rem;
+  font-family:'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+
+  transition: background-color 0.2s ease, transform 0.2s ease-in-out;
+}
+
+
+button.submit:hover:not(:active):not(:disabled){
+  background: var(--btn-primary-hover);
+  transform: scale(1.02);
+}
+
+button.submit:active:not(:disabled){
+  transform: scale(0.97);
+}
+
+button.submit:disabled{
+  background: var(--btn-primary-disabled);
+}
+
+button.submit.success{
+  background: var(--btn-primary-success);
+}
+
+.modal-overlay{
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 19, 24, 0.5); /* Dimmed backdrop */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content{
+  background: #ffffff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  border-radius: 24px;
+  width: min(360px, calc(100vw - 32px));
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.07);
+  outline: none;
+
+  transition: transform 1s linear(
+    0, 0.01 1.7%, 0.05 3.5%, 0.17 7.1%, 0.36 10.9%, 
+    0.61 15%, 0.88 19.5%, 1.11 24.1%, 1.25 28.5%, 
+    1.29 31.1%, 1.29 33.3%, 1.25 35.8%, 1.15 38.6%, 
+    0.99 42.1%, 0.88 45.9%, 0.83 49.3%, 0.83 51.6%, 
+    0.86 54.4%, 0.94 58.4%, 1.02 63.8%, 1.05 68.1%, 
+    1.04 72.8%, 0.99 80.4%, 0.98 86.1%, 1
+  );
+  
+}
+
+.modal-accent{
+  display: flex;
+  flex-direction: column;
+  padding: 28px, 24px,22px;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-accent.win{
+  background: linear-gradient(135deg, var(--you-primary) 0%, #6B8FFF 100%);
+}
+
+.modal-accent.loss{
+  background: linear-gradient(135deg, #6B7280 0%, #9CA3AF 100%);
+}
+
+.modal-body{
+  padding: 24px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/*-----Waiting -----*/
+/* Modal card — matches the Figma display-board container styling */
+.waiting-modal {
+  background: var(--surface-alt, #F4F5F7);
+  border-radius: 20px;
+  padding: 48px 40px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  min-width: 280px;
+  max-width: 360px;
+}
+
+/* Orbit coordinate space */
+.waiting-orbit {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+/* The visible ring the balls travel along.
+ * inset=11.5px on a 72px box gives a 49px-diameter circle centred at (36,36). */
+.waiting-track {
+  position: absolute;
+  inset: 11.5px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, 0.07);
+}
+
+/* Two independent rotating wrappers — one clockwise, one counter-clockwise.
+ * Each wrapper carries its ball around the shared centre. Because both balls
+ * start at the top and rotate in opposite directions, they cross at the top
+ * and bottom of every cycle. */
+.waiting-orbit-cw,
+.waiting-orbit-ccw {
+  position: absolute;
+  inset: 0;
+}
+
+.waiting-orbit-cw {
+  animation: waiting-spin-cw 2.6s linear infinite;
+}
+
+.waiting-orbit-ccw {
+  animation: waiting-spin-ccw 2.6s linear infinite;
+}
+
+/* Ball geometry — sits pinned at the top of its rotating wrapper.
+ * top=5px (=inset 11.5 − radius 6.5) places the ball's centre exactly on
+ * the track ring. box-sizing keeps the O ring's outer edge the same size
+ * as the X dot despite its 2.5px border. */
+.waiting-ball {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+}
+
+/* X ball — solid blue with soft glow */
+.waiting-ball-you {
+  background: var(--you, #2563eb);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.44);
+}
+
+/* O ball — orange ring with soft glow */
+.waiting-ball-opponent {
+  border: 2.5px solid var(--opponent, #ea580c);
+  background: transparent;
+  box-shadow: 0 0 8px rgba(234, 88, 12, 0.31);
+}
+
+@keyframes waiting-spin-cw {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes waiting-spin-ccw {
+  to { transform: rotate(-360deg); }
+}
+
+/* Text */
+.waiting-text-block {
+  text-align: center;
+}
+
+.waiting-text {
+  margin: 0 0 4px;
+  color: var(--fg, #1a1a1a);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.waiting-subtext {
+  margin: 0;
+  color: var(--muted, #666666);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+/* Animated ellipsis — three dots pulsing in sequence.
+ * Base opacity 0.2 keeps them visible mid-cycle; keyframes bring each to
+ * full opacity at its own moment, staggered 0.22s apart. */
+.waiting-dots {
+  display: inline-block;
+}
+
+.waiting-dots span {
+  display: inline-block;
+  opacity: 0.2;
+  animation: waiting-dot-pulse 1.4s ease-in-out infinite;
+}
+
+.waiting-dots span:nth-child(2) { animation-delay: 0.22s; }
+.waiting-dots span:nth-child(3) { animation-delay: 0.44s; }
+
+@keyframes waiting-dot-pulse {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+
+/* Reduced motion: slow the orbit, freeze the dots at full opacity.
+ * A completely static loader is confusing; a slower one still communicates
+ * "in progress". */
+@media (prefers-reduced-motion: reduce) {
+  .waiting-orbit-cw,
+  .waiting-orbit-ccw {
+    animation-duration: 8s;
+  }
+  .waiting-dots span {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/*----- Vite Default CSS Below -----*/
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+

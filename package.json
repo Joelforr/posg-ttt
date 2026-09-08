@@ -1,0 +1,28 @@
+{
+  "name": "posg-ttt",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm --filter @posg-ttt/engine test",
+    "dev:server": "pnpm --filter @posg-ttt/server dev",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.13.1",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "wscat": "^6.1.0"
+  }
+}
